@@ -1,0 +1,8 @@
+trimesh
+manifold3d
+numpy
+scipy
+shapely
+rtree
+pillow
+matplotlib
