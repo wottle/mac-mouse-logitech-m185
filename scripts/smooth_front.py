@@ -2,6 +2,7 @@
 from geo import *
 SCREW=[(-23.2,36.8),(23.2,36.8)]     # front-corner case screws
 SEAM=6.8
+SIDE_PLANE=30.39                # half-width the upper shell's sides are planed to (0.3 mm off each side)
 WALL_X=27.8; RAMP_TOP=23.1        # inner side wall; height where the post ramp meets it
 NB=lambda z0,z1,y0=40.0: box(-13.5,13.5,y0,52,z0,z1)
 def flush_ceiling(U,x0,x1,y0,y1,label=''):
@@ -64,6 +65,7 @@ def smooth_upper(U):
         fp=(cyl(x,y,15.0,23.5,3.4)+box(min(x,s*29),max(x,s*29),y-2.6,y+2.6,15.0,23.5)+box(x-2.6,x+2.6,y,46,15.0,23.5))
         U=U+((fp.trim_by_plane([s,0,-1],(WALL_X-RAMP_TOP)/2**0.5))^band2)
     for x,y in SCREW: U=U-cyl(x,y,SEAM-1,13.8,1.35)
+    U=U^box(-SIDE_PLANE,SIDE_PLANE,-80,80,-10,80)        # plane both sides dead flat for printing on its side
     return clean_inside(U)
 BEVEL=3.0
 def flat_bottom(Lo):
@@ -86,12 +88,15 @@ ST_Y=CUT_LIP-2.1                # screw axis: shank sits 0.6 mm behind the 2 mm 
 def front_standoff(Lo):
     post=box(ST_X-3.5,ST_X+3.5,ST_Y-3.0,42.3,0.5,PCB_SEAT)      # runs forward under the bridge and into the front wall
     return Lo+post-cyl(ST_X,ST_Y,0.8,PCB_SEAT+1,1.35)
+LATCH_TAB_TOP=14.6              # top face of the upper shell's two rear tabs
+LATCH_GAP=0.25                  # clearance above the tabs (0 = original, too tight to assemble; 0.9 left 1 mm of play)
 def relax_latch(Lo):
-    """Rear latch: taller, squarer slots (0.85 mm above the tabs instead of touching) and a thicker bar over them."""
+    """Rear latch: square slots with a little clearance over the tabs, and a thicker bar above them."""
+    top=LATCH_TAB_TOP+LATCH_GAP
     for s in (1,-1):
         x0,x1=sorted((s*4.6,s*15.3))
-        Lo=Lo+box(min(s*3.5,s*16.4),max(s*3.5,s*16.4),-44.17,-41.3,15.5,16.7)     # bar reinforced toward the inside
-        Lo=Lo-box(x0,x1,-44.6,-41.0,11.9,15.5)
+        Lo=Lo+box(min(s*3.5,s*16.4),max(s*3.5,s*16.4),-44.17,-41.3,top,16.7)     # bar reinforced toward the inside
+        Lo=Lo-box(x0,x1,-44.6,-41.0,11.9,top)
     return Lo
 def smooth_lower(Lo):
     H=(Lo-box(-16,16,40,60,-5,60)).hull()

@@ -29,7 +29,7 @@ The logo is a separate plate glued into the recess on top (close-up from an earl
 | Item | Notes |
 |------|-------|
 | **Genuine** Logitech M185 wireless mouse | Donor for the electronics. Knock-offs sold as the M185 have a different PCB and will not fit. |
-| 3D printer + PLA | See [docs/PRINTING.md](docs/PRINTING.md). |
+| 3D printer + PLA | Parts fit a 0.4 mm nozzle; a ready-to-slice project is included. See [docs/PRINTING.md](docs/PRINTING.md). |
 | Small Phillips screwdriver | For the M185's own screws. |
 | 1 × AA battery | Alkaline AA. |
 | PTFE mouse slides (optional) | The underside is flat with no feet. |
@@ -56,7 +56,7 @@ position in one common frame (X right, Y toward the buttons, Z up, underside at 
 | File | Qty | Size (mm) | Purpose |
 |------|:---:|-----------|---------|
 | `lower_shell.stl` | 1 | 61.3 × 93.9 × 18.1 | Bottom shell. M0100 outline with the M185 mounting inside: PCB seats, rear screw boss, front standoff, sensor window, power-switch slot, diagonal AA bay. Flat underside with a 45° bevel. |
-| `upper_shell.stl` | 1 | 61.4 × 94.3 × 27.8 | Top shell. M0100 form with the cable/screw tab removed, vertical side walls, a 1.4 mm recess for a logo plate, and bosses inside for the case screws and the button retainer. |
+| `upper_shell.stl` | 1 | 60.8 × 94.3 × 27.8 | Top shell. M0100 form with the cable/screw tab removed, flat vertical side walls, a 1.4 mm recess for a logo plate, and bosses inside for the case screws and the button retainer. |
 | `button_left.stl` | 1 | 23.7 × 34.5 × 17.2 | Left button, with a post for its striker screw. |
 | `button_right.stl` | 1 | 20.5 × 34.5 × 17.2 | Right button, with a post for its striker screw. |
 | `button_retainer.stl` | 1 | 40.8 × 12.1 × 2.4 | Plate that holds both buttons' hinge bar in the top shell. |
@@ -80,8 +80,8 @@ Part previews are in [`images/`](images/).
 - No cable, so the tab at the front that held the cable and the case screws is gone.
   The case screws moved to the front corners, driven from underneath. The rear still
   hooks in with the original two tabs.
-- The upper shell's side walls are vertical (the original leans in 1.75°), so it can be
-  printed lying on its side.
+- The upper shell's side walls are vertical and planed flat (the original leans in 1.75°),
+  so it can be printed lying on its side.
 - The underside is flat, without the ball ring and feet.
 - The left striker sits outboard of the left button, under the shell's shoulder, because
   the M185's left switch is about 3 mm outside the button opening.
@@ -90,8 +90,6 @@ Part previews are in [`images/`](images/).
 
 - Button fit in the shell opening is the original 0.3 mm per side and may need a light
   sanding.
-- The two rear latch tabs on the upper shell are small overhangs in most print
-  orientations.
 - Striker screws must be tuned with the case screws tight; see the assembly guide.
 - The switch positions come from caliper measurements on one M185 board
   (`210-002552 REV003`). Other board revisions have not been checked.
@@ -100,8 +98,9 @@ Part previews are in [`images/`](images/).
 
 ```
 models/     Print-ready STLs (one per part)
+print/      Slicer project with plate layout, orientation and supports (Bambu Studio / Bambu Lab A1)
 docs/       Printing and assembly instructions
-images/     Part previews; photos/ has pictures of the printed mouse
+images/     Part previews; photos/ has pictures of the printed mouse, plates/ the slicer plates
 scripts/    build_models.py — regenerates models/ and images/preview.png from source/
 source/     Input meshes for the scripts (see source/README.md)
 ```

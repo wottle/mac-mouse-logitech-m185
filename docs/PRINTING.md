@@ -1,18 +1,44 @@
 # Printing
 
-The parts were designed for a 0.4 mm nozzle and PLA. Orientations below are what each
-part was designed for; slicer settings are not included yet.
+A ready-to-slice project is in [`print/`](../print/):
 
-<!-- TODO(author): add the printer, layer height, and slicer projects (print/) once the settings are final. -->
+- `MacMouse_BambuStudio_A1.3mf` — Bambu Studio 2.7, Bambu Lab A1, 0.4 mm nozzle.
+
+It has every part oriented and the supports set up, so the simplest route is to open it,
+pick your filament and print. If you use another slicer or printer, copy the orientations
+and settings below.
+
+| Plate 1 — all parts | Plate 2 — logo badges |
+|---|---|
+| ![Plate 1](../images/plates/plate_1.png) | ![Plate 2](../images/plates/plate_2.png) |
+
+## Settings used
+
+| Setting | Value |
+|---------|-------|
+| Printer / nozzle | Bambu Lab A1, 0.4 mm |
+| Profile | 0.20mm Standard |
+| Filament | PLA (PolyTerra PLA) |
+| Bed | Textured PEI plate |
+| Walls / infill | 2 walls, 15% grid |
+| Supports | Off globally; turned on per part as listed below |
+
+## Orientation and supports
 
 | Part | Orientation | Supports |
 |------|-------------|----------|
-| `lower_shell.stl` | As modelled, flat underside on the bed. | None needed. The underside is flat with a 3 mm × 45° bevel, and the case-screw recesses end in a 45° cone. The battery door seat is the only flat overhang (about 1 mm up), the same as on the Lisa mouse base. |
-| `upper_shell.stl` | On its side, or top face down. | On its side: the side walls are vertical and flat, so the shell lies flat and the top stands square to the bed. Top face down: the screw posts ramp to the side walls at 45°, so only the two small rear latch tabs (7 × 3 mm) hang free. |
-| `button_left.stl`, `button_right.stl` | Not settled. | The caps are solid. The striker posts have a 2.7 mm hole for an M3 screw. |
-| `button_retainer.stl` | Flat, countersinks up. | None. |
-| `logo_plate_blank.stl` | Show face down on the bed for the best finish. | None. The back edge has a 0.4 mm bevel so it seats fully in the recess. |
-| `on_off_button.stl`, `battery_cover_1.stl`, `battery_cover_2.stl` | As for the Lisa mouse. | See the Lisa mouse printing guide. |
+| `lower_shell.stl` | As modelled, flat underside on the bed. | None. The underside is flat with a 3 mm × 45° bevel, and the case-screw recesses end in a 45° cone. |
+| `upper_shell.stl` | On its side, one side wall on the bed. | Tree supports, painted manually (threshold 30°), only where needed. On its side the top stands square to the bed, so it has no stepped layer lines. |
+| `button_left.stl`, `button_right.stl` | Standing on the flat face that faces the other button. | Tree supports, automatic. |
+| `button_retainer.stl` | Flat. | None. |
+| `on_off_button.stl`, `battery_cover_1.stl`, `battery_cover_2.stl` | As modelled. | None. |
+| Logo badge | Flat, show face up, 0.12 mm layers with top-surface ironing (plate 2). | None. |
+
+The upper shell's two side faces are planed dead flat (0.3 mm off each side of the
+original form), so it sits fully on the bed and the top prints square.
+
+The project also contains the logo badge used on the mouse in the photos. The repository's
+`models/logo_plate_blank.stl` is a blank of the same size for making your own.
 
 ## Fit notes
 
@@ -21,4 +47,7 @@ part was designed for; slicer settings are not included yet.
 - The hinge bar on each button runs in sockets with 0.15 mm clearance, with the retainer
   plate 0.07 mm underneath. If a button does not swing freely, sand the bar lightly or
   back the retainer screws off a little.
+- The two rear tabs on the upper shell sit in slots with 0.25 mm clearance above them. If
+  the rear of the case is loose or will not go together, change `LATCH_GAP` in
+  `scripts/smooth_front.py` and rebuild.
 - The logo recess is 10.1 × 10.1 mm and 1.4 mm deep; the blank is 9.9 × 9.9 × 1.4 mm.
