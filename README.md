@@ -8,12 +8,21 @@ one-button original, this one has **two buttons**, and with no cable the front i
 It is a sibling of the [Lisa mouse conversion](https://github.com/wottle/lisa-mouse-logitech-m185)
 and reuses that project's M185 mounting, power slider and battery door.
 
-![Preview of the parts](images/preview.png)
-
-<!-- TODO(author): replace the render above with a photo of the finished mouse. -->
+![The finished Macintosh mouse](images/photos/finished_front_right.jpg)
 
 > **Status: work in progress.** The shells have been printed and test-fitted and both
 > buttons click, but the design is still being revised. See [Known issues](#known-issues).
+
+## Photos
+
+| | |
+|---|---|
+| ![Rear three-quarter view](images/photos/finished_rear_left.jpg) | ![Side view](images/photos/finished_side.jpg) |
+| ![Front view, two buttons](images/photos/finished_front.jpg) | ![Underside with PTFE slides, battery door, sensor window and power slider](images/photos/underside.jpg) |
+
+The logo is a separate plate glued into the recess on top (close-up from an earlier test print):
+
+![Logo plate in its recess](images/photos/logo_plate_closeup.jpg)
 
 ## What you need
 
@@ -58,6 +67,8 @@ position in one common frame (X right, Y toward the buttons, Z up, underside at 
 
 Part previews are in [`images/`](images/).
 
+![Render of the parts](images/preview.png)
+
 ## Build it
 
 1. **Print** the parts — [docs/PRINTING.md](docs/PRINTING.md)
@@ -90,7 +101,7 @@ Part previews are in [`images/`](images/).
 ```
 models/     Print-ready STLs (one per part)
 docs/       Printing and assembly instructions
-images/     Part previews
+images/     Part previews; photos/ has pictures of the printed mouse
 scripts/    build_models.py — regenerates models/ and images/preview.png from source/
 source/     Input meshes for the scripts (see source/README.md)
 ```
