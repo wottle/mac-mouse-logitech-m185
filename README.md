@@ -10,6 +10,10 @@ and reuses that project's M185 mounting, power slider and battery door.
 
 ![The finished Macintosh mouse](images/photos/finished_front_right.jpg)
 
+![Animation: the Macintosh mouse's parts coming together](images/animation.gif)
+
+*The printed parts coming apart and together (render; [10 s MP4, 720p](images/animation.mp4)).*
+
 > **Status: work in progress.** The shells have been printed and test-fitted and both
 > buttons click, but the design is still being revised. See [Known issues](#known-issues).
 

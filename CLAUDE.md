@@ -108,6 +108,12 @@ Open items (all Mike's):
   licence (CC BY-NC-SA 4.0) is compatible. Until then `source/m0100/` stays untracked.
 - Assembly photos (`docs/ASSEMBLY.md` TODO).
 
+## Animation
+
+`images/animation.gif` (README, 640×360, 15 fps) and `images/animation.mp4` (1280×720, 30 fps, 10 s loop)
+are VTK renders of the assembled models: exploded, together, one full turn, apart again. They were rendered
+outside the repo (offscreen VTK through EGL, piped to ffmpeg); re-render them when the models change.
+
 ## Working conventions
 
 - **Mike runs git himself.** Leave changes uncommitted and give him the commit command. Claude cannot
