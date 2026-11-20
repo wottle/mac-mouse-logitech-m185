@@ -18,9 +18,10 @@ def straighten_sides(m,z0=6.8,x_in=22.0,x_full=27.0):
     w=np.clip((ax-x_in)/(x_full-x_in),0,1); w=w*w*(3-2*w)
     v[:,0]+=np.sign(v[:,0])*w*SIDE_DRAFT*np.clip(v[:,2]-z0,0,None)
     m.vertices=v; return m
-def tm_mac(name):
+def tm_mac(name,straight=True):
+    """straight: straighten the upper shell's sides (the FDM shell). The resin shell keeps the original's lean."""
     m=trimesh.load(MACF[name],force='mesh'); m.apply_transform(T_MAC); m.merge_vertices(digits_vertex=5)
-    if name=='upper': straighten_sides(m)
+    if name=='upper' and straight: straighten_sides(m)
     return m
 def to_man(m):
     M=Manifold(Mesh(vert_properties=np.asarray(m.vertices,dtype=np.float32),tri_verts=np.asarray(m.faces,dtype=np.uint32)))

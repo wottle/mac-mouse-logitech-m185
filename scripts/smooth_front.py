@@ -49,7 +49,7 @@ def logo_plate(U_before):
     o=o.offset(-LOGO_CLEAR,mf.JoinType.Round).translate([-cx,-cy])
     back=(o.offset(-LOGO_BEVEL,mf.JoinType.Round).extrude(0.01)+o.extrude(0.01).translate([0,0,LOGO_BEVEL])).hull()
     return back+o.extrude(LOGO_T-LOGO_BEVEL).translate([0,0,LOGO_BEVEL])
-def smooth_upper(U):
+def smooth_upper(U,fdm=True):
     H=(U-box(-16,16,40,60,-5,60)).hull()                 # outer form without the tab
     U=U^H
     U=U-box(-12.6,12.6,39.6,52,0,17.4)                   # tab remnants inside (screw blocks, cable comb)
@@ -65,7 +65,7 @@ def smooth_upper(U):
         fp=(cyl(x,y,15.0,23.5,3.4)+box(min(x,s*29),max(x,s*29),y-2.6,y+2.6,15.0,23.5)+box(x-2.6,x+2.6,y,46,15.0,23.5))
         U=U+((fp.trim_by_plane([s,0,-1],(WALL_X-RAMP_TOP)/2**0.5))^band2)
     for x,y in SCREW: U=U-cyl(x,y,SEAM-1,13.8,1.35)
-    U=U^box(-SIDE_PLANE,SIDE_PLANE,-80,80,-10,80)        # plane both sides dead flat for printing on its side
+    if fdm: U=U^box(-SIDE_PLANE,SIDE_PLANE,-80,80,-10,80)   # plane both sides dead flat for printing on its side (FDM only)
     return clean_inside(U)
 BEVEL=3.0
 def flat_bottom(Lo):

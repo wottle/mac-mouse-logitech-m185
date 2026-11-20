@@ -17,7 +17,8 @@ recess) is being carried back to the Lisa mouse. That repo has its own `CLAUDE.m
 
 | Path | What |
 |------|------|
-| `models/` | The STLs people print. All except the three carried-over parts are generated. |
+| `models/common/` | The STLs people print either way: everything but the upper shell. All except the three carried-over parts are generated. |
+| `models/fdm/`, `models/resin/` | `upper_shell.stl`: FDM with straightened, planed sides; resin with the original's lean (`build_upper(fdm=False)`, `smooth_upper(fdm=False)`). |
 | `scripts/` | The whole build (see below). |
 | `source/lisa/base.stl` | Base from the Lisa conversion; source of the M185 mounting. |
 | `source/m0100/` | Original M0100 model (upper shell, lower shell, button). **Git-ignored**: its licence and creator are not confirmed. Needed locally to rebuild. Never commit it. |
@@ -36,11 +37,12 @@ pip install -r scripts/requirements.txt
 python3 scripts/build_models.py
 ```
 
-This regenerates `models/*.stl` and `images/preview.png`, then runs the fit checks. Pipeline:
+This regenerates `models/{common,fdm,resin}/*.stl` and `images/preview.png`, then runs the fit checks for each upper
+shell with the common parts. Pipeline:
 
 | Script | Does |
 |--------|------|
-| `geo.py` | Frames, loaders, CSG helpers. `tm_mac()` loads an M0100 part into the final frame and straightens the upper shell's sides. |
+| `geo.py` | Frames, loaders, CSG helpers. `tm_mac()` loads an M0100 part into the final frame and (unless `straight=False`) straightens the upper shell's sides. |
 | `lisa_solid.py` | Rebuilds the messy Lisa base layer by layer into one clean solid (`build/lisa_base_solid.stl`). |
 | `build_lower.py` | New lower shell: M0100 outline with the Lisa/M185 interior. |
 | `build_top.py` | Upper shell changes, the two buttons, the retainer plate. Switch, hinge and striker constants live here. |
@@ -89,8 +91,10 @@ Each item below came from a test print. Do not undo one without a reason.
 - **PCB front standoff** in the wheel cutout (`ST_X`, `ST_Y`), level with the ledges: an M3×6 clamps
   the front of the board so it cannot lift when the rear screw is tightened. Placed erring toward the
   inside of the cutout.
-- **Parallel sides:** `straighten_sides()` makes the upper shell's sides vertical, then they are planed
-  to `SIDE_PLANE = 30.39`, so the shell prints standing on a side. That orientation prints much better.
+- **Parallel sides (FDM upper only):** `straighten_sides()` makes the upper shell's sides vertical, then they are
+  planed to `SIDE_PLANE = 30.39`, so the shell prints standing on a side. That orientation prints much better.
+  The resin upper keeps the original's 1.75° lean (Mike, 2026-11-20). Straightening only moves |x| > 22 and above the
+  seam, so the lower shell, buttons and retainer are the same for both and pass the checks with either upper.
 - **Inside clean-up:** ball-mouse leftovers removed (rectangular frame, the raised patch under it, the
   diagonal rib, stubs on the front wall). An added rib under the roof once hit the battery holder with
   0.15 mm to spare in the model; it was removed.
@@ -121,7 +125,9 @@ outside the repo (offscreen VTK through EGL, piped to ffmpeg); re-render them wh
 - Never report something as removed, replaced or delivered without checking the output: look at a
   render of the exact feature, and after writing files to the Mac compare checksums there against the
   build. Do not copy and write in the same parallel step.
-- Print-friendliness rules Mike has asked for: flat bottoms with 45° bevels, 45° ramps under bosses,
+- Two outputs: FDM upper (print-friendly changes) and resin upper (the original's outside). Keep anything that
+  changes the outside only for printing on FDM behind the `fdm` switch.
+- Print-friendliness rules Mike has asked for (FDM): flat bottoms with 45° bevels, 45° ramps under bosses,
   conical countersinks, parallel sides for on-side printing, supports only where unavoidable.
 - One named constant per tunable dimension, with a comment saying what it does and what was tried.
 - Checks: overlap between every pair of parts and against the electronics stand-ins, buttons at rest

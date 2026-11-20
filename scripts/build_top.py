@@ -10,15 +10,15 @@ SW_TOP=16.1                              # plunger free height
 COL_BOT=18.9; COL_R=3.0
 GAP=0.8                                  # slot between the two buttons
 
-def build_upper():
-    U=to_man(tm_mac('upper'))
+def build_upper(fdm=True):
+    U=to_man(tm_mac('upper',fdm))
     # 1. close the cable opening in the nose
     U=U+box(-3.95,3.95,45.15,47.2,4.85,13.95)
     # 2. nose screw bores opened from 2.5 to 2.7 for M3
     for x in (-6.82,6.82): U=U-cyl(x,44.13,4.0,16.4,1.35)
     # 3. two more hinge saddles so each half-button sits in two
     for s in (1,-1):
-        sad=to_man(tm_mac('upper'))^box(min(s*5.5,s*7.5),max(s*5.5,s*7.5),2.85,10.5,26.0,30.3)
+        sad=to_man(tm_mac('upper',fdm))^box(min(s*5.5,s*7.5),max(s*5.5,s*7.5),2.85,10.5,26.0,30.3)
         U=U+sad.translate([s*SADDLE_DX,0,0])
     # 3b. close up the saddle sockets round the hinge bar (original had 0.5 mm of play above it; now 0.15)
     for s in (1,-1):

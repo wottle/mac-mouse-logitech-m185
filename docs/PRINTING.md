@@ -8,6 +8,11 @@ It has every part oriented and the supports set up, so the simplest route is to 
 pick your filament and print. If you use another slicer or printer, copy the orientations
 and settings below.
 
+**Which upper shell:** this page is for FDM, with `models/fdm/upper_shell.stl` (straightened sides,
+printed on its side) and everything in `models/common/`. On a resin printer use
+`models/resin/upper_shell.stl` instead: it keeps the original M0100's leaning side walls. Orient and
+support resin parts as your resin slicer suggests.
+
 | Plate 1 — all parts | Plate 2 — logo badges |
 |---|---|
 | ![Plate 1](../images/plates/plate_1.png) | ![Plate 2](../images/plates/plate_2.png) |
@@ -38,7 +43,7 @@ The upper shell's two side faces are planed dead flat (0.3 mm off each side of t
 original form), so it sits fully on the bed and the top prints square.
 
 The project also contains the logo badge used on the mouse in the photos. The repository's
-`models/logo_plate_blank.stl` is a blank of the same size for making your own.
+`models/common/logo_plate_blank.stl` is a blank of the same size for making your own.
 
 ## Fit notes
 

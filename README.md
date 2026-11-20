@@ -53,21 +53,29 @@ All holes use the same sizes as the Lisa mouse: 2.7 mm pilot, 3.2–3.3 mm clear
 
 ## Printed parts
 
-STL files are in [`models/`](models/). Dimensions are the bounding box in the model's
-design orientation (X × Y × Z, mm). All parts except the logo plate are in assembled
+STL files are in [`models/`](models/), in three folders:
+
+| Folder | What |
+|--------|------|
+| [`models/common/`](models/common/) | Everything except the upper shell: the same however you print. |
+| [`models/fdm/`](models/fdm/) | The upper shell for **FDM**: side walls straightened and planed flat, so it prints lying on its side (see [PRINTING.md](docs/PRINTING.md)). |
+| [`models/resin/`](models/resin/) | The upper shell for **resin**: the side walls lean in like the original M0100's. Everything else matches the FDM shell. |
+
+Print the upper shell from `fdm/` or `resin/`, and the rest from `common/`. Dimensions are the
+bounding box in the model's design orientation (X × Y × Z, mm). All parts except the logo plate are in assembled
 position in one common frame (X right, Y toward the buttons, Z up, underside at Z = 0).
 
 | File | Qty | Size (mm) | Purpose |
 |------|:---:|-----------|---------|
-| `lower_shell.stl` | 1 | 61.3 × 93.9 × 18.1 | Bottom shell. M0100 outline with the M185 mounting inside: PCB seats, rear screw boss, front standoff, sensor window, power-switch slot, diagonal AA bay. Flat underside with a 45° bevel. |
-| `upper_shell.stl` | 1 | 60.8 × 94.3 × 27.8 | Top shell. M0100 form with the cable/screw tab removed, flat vertical side walls, a 1.4 mm recess for a logo plate, and bosses inside for the case screws and the button retainer. |
-| `button_left.stl` | 1 | 23.7 × 34.5 × 17.2 | Left button, with a post for its striker screw. |
-| `button_right.stl` | 1 | 20.5 × 34.5 × 17.2 | Right button, with a post for its striker screw. |
-| `button_retainer.stl` | 1 | 40.8 × 12.1 × 2.4 | Plate that holds both buttons' hinge bar in the top shell. |
-| `logo_plate_blank.stl` | 1 | 9.9 × 9.9 × 1.4 | Blank insert for the logo recess. Add your own logo and print it separately. |
-| `on_off_button.stl` | 1 | 12.0 × 7.2 × 6.0 | Power switch slider. Unchanged from the Lisa mouse. |
-| `battery_cover_1.stl` | 1 | 14.7 × 53.1 × 8.9 | Battery door, main plate. Unchanged from the Lisa mouse. |
-| `battery_cover_2.stl` | 1 | 7.5 × 11.8 × 6.2 | Battery door, latch piece. Unchanged from the Lisa mouse. |
+| `common/lower_shell.stl` | 1 | 61.3 × 93.9 × 18.1 | Bottom shell. M0100 outline with the M185 mounting inside: PCB seats, rear screw boss, front standoff, sensor window, power-switch slot, diagonal AA bay. Flat underside with a 45° bevel. |
+| `fdm/upper_shell.stl` or `resin/upper_shell.stl` | 1 | 60.8 × 94.3 × 27.8 (resin: 61.4 wide) | Top shell. M0100 form with the cable/screw tab removed (FDM: flat vertical side walls), a 1.4 mm recess for a logo plate, and bosses inside for the case screws and the button retainer. |
+| `common/button_left.stl` | 1 | 23.7 × 34.5 × 17.2 | Left button, with a post for its striker screw. |
+| `common/button_right.stl` | 1 | 20.5 × 34.5 × 17.2 | Right button, with a post for its striker screw. |
+| `common/button_retainer.stl` | 1 | 40.8 × 12.1 × 2.4 | Plate that holds both buttons' hinge bar in the top shell. |
+| `common/logo_plate_blank.stl` | 1 | 9.9 × 9.9 × 1.4 | Blank insert for the logo recess. Add your own logo and print it separately. |
+| `common/on_off_button.stl` | 1 | 12.0 × 7.2 × 6.0 | Power switch slider. Unchanged from the Lisa mouse. |
+| `common/battery_cover_1.stl` | 1 | 14.7 × 53.1 × 8.9 | Battery door, main plate. Unchanged from the Lisa mouse. |
+| `common/battery_cover_2.stl` | 1 | 7.5 × 11.8 × 6.2 | Battery door, latch piece. Unchanged from the Lisa mouse. |
 
 Part previews are in [`images/`](images/).
 
@@ -84,8 +92,8 @@ Part previews are in [`images/`](images/).
 - No cable, so the tab at the front that held the cable and the case screws is gone.
   The case screws moved to the front corners, driven from underneath. The rear still
   hooks in with the original two tabs.
-- The upper shell's side walls are vertical and planed flat (the original leans in 1.75°),
-  so it can be printed lying on its side.
+- FDM upper shell only: the side walls are vertical and planed flat (the original leans in 1.75°),
+  so it can be printed lying on its side. The resin upper shell keeps the original's lean.
 - The underside is flat, without the ball ring and feet.
 - The left striker sits outboard of the left button, under the shell's shoulder, because
   the M185's left switch is about 3 mm outside the button opening.
@@ -101,7 +109,7 @@ Part previews are in [`images/`](images/).
 ## Repository layout
 
 ```
-models/     Print-ready STLs (one per part)
+models/     Print-ready STLs: common/ (both ways), fdm/ and resin/ (the upper shell)
 print/      Slicer project with plate layout, orientation and supports (Bambu Studio / Bambu Lab A1)
 docs/       Printing and assembly instructions
 images/     Part previews; photos/ has pictures of the printed mouse, plates/ the slicer plates

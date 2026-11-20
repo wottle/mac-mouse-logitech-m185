@@ -3,7 +3,8 @@
 Taking the M185 apart, sliding its power switch to the side, and fitting the power
 slider, battery contacts and battery door are the same as for the Lisa mouse. Use the
 [Lisa mouse assembly guide](https://github.com/wottle/lisa-mouse-logitech-m185/blob/main/docs/ASSEMBLY.md)
-for those steps; the steps below cover what is different.
+for those steps; the steps below cover what is different. The upper shell is in `models/fdm/` or
+`models/resin/` (whichever you printed); everything else is in `models/common/`.
 
 <!-- TODO(author): add assembly photos. -->
 

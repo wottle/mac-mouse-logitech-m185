@@ -3,7 +3,7 @@
 Inputs for `scripts/build_models.py`.
 
 - `lisa/base.stl` — the base from the
-  [Lisa mouse conversion](https://github.com/wottle/lisa-mouse-logitech-m185) (`models/base.stl`).
+  [Lisa mouse conversion](https://github.com/wottle/lisa-mouse-logitech-m185) (`models/v1/base.stl` there; the M185 mounting is the same as the v1 base).
   The M185 mounting is taken from it.
 - `m0100/` — the original Apple Macintosh mouse M0100 model: `M0100 - Lower Shell.STL`,
   `M0100 - Upper Shell.STL`, `M0100 - Button.STL` (and the SolidWorks parts they were
